@@ -180,19 +180,21 @@ export default function WeatherPage() {
                             5-Day Forecast
                         </h3>
                         <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                            {weather.forecast.map((day, index) => (
-                                <Card key={index} className="text-center hover:shadow-md transition-shadow">
-                                    <CardContent className="pt-6">
-                                        <div className="font-medium text-muted-foreground mb-2">{day.day}</div>
-                                        <img
-                                            src={day.icon}
-                                            alt={day.condition}
-                                            className="h-12 w-12 mx-auto mb-2"
-                                        />
-                                        <div className="font-bold text-xl mb-1">{day.temp}°</div>
-                                        <div className="text-xs text-muted-foreground line-clamp-1">{day.condition}</div>
-                                    </CardContent>
-                                </Card>
+                            {weather.forecast && Array.isArray(weather.forecast) && weather.forecast.map((day, index) => (
+                                day && typeof day.temp !== 'undefined' ? (
+                                    <Card key={index} className="text-center hover:shadow-md transition-shadow">
+                                        <CardContent className="pt-6">
+                                            <div className="font-medium text-muted-foreground mb-2">{day.day}</div>
+                                            <img
+                                                src={day.icon}
+                                                alt={day.condition}
+                                                className="h-12 w-12 mx-auto mb-2"
+                                            />
+                                            <div className="font-bold text-xl mb-1">{day.temp}°</div>
+                                            <div className="text-xs text-muted-foreground line-clamp-1">{day.condition}</div>
+                                        </CardContent>
+                                    </Card>
+                                ) : null
                             ))}
                         </div>
                     </div>
